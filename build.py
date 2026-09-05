@@ -188,9 +188,13 @@ def md_to_html(text):
 
 # Build the TOC items
 toc_items = ""
-for num in sorted(chapters.keys()):
+for num in sorted(chapters.keys(), key=int):
     title, _ = chapters[num]
     toc_items += f'      <li><span class="chap-num">{num}.</span> <a href="#chapter-{num}">{title}</a></li>\n'
+
+# Add glossary to TOC if it exists
+if glossary_html:
+    toc_items += '      <li><span class="chap-num">A.</span> <a href="#glossary">Glossary of Swedish Terms</a></li>\n'
 
 # Build chapter articles
 chapter_html = ""
@@ -213,6 +217,25 @@ chapter_count = len(chapters)
 chapter_word = "Chapter" if chapter_count == 1 else "Chapters"
 
 # Convert wordcount table to HTML for notes section
+glossary_html = ""
+glossary_match = re.search(r'^# Glossary.*?\Z', md, re.DOTALL | re.MULTILINE)
+if glossary_match:
+    glossary_md = glossary_match.group(0)
+    # Strip the H1 title (we'll add our own)
+    glossary_md_no_title = re.sub(r'^# Glossary[^\n]*\n', '', glossary_md, count=1)
+    # Convert to HTML — tables, headings, paragraphs
+    gloss_inner = glossary_md_no_title.strip()
+    # Wrap in article with id for TOC linking
+    glossary_html = f'''
+  <article class="chapter glossary" id="glossary">
+    <header class="chapter-head">
+      <p class="chapter-number">Appendix</p>
+      <h2 class="chapter-title">Glossary of Swedish Terms</h2>
+    </header>
+{md_to_html(gloss_inner)}
+  </article>
+'''
+
 def wc_table_to_html(md_table):
     lines = [l for l in md_table.split('\n') if l.strip().startswith('|')]
     if not lines:
@@ -398,6 +421,7 @@ html = f'''<!DOCTYPE html>
   </nav>
 
 {chapter_html}
+{glossary_html}
 
   <section class="notes">
     <h2>Notes on the {chapter_count}-chapter set</h2>
