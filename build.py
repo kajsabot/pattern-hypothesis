@@ -194,7 +194,7 @@ for num in sorted(chapters.keys()):
 
 # Build chapter articles
 chapter_html = ""
-for num in sorted(chapters.keys()):
+for num in sorted(chapters.keys(), key=int):
     title, content = chapters[num]
     body = md_to_html(content)
     chapter_html += f'''
