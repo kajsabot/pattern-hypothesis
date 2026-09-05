@@ -39,11 +39,9 @@ while i < len(parts) - 2:
 notes_match = re.search(r'## Notes on revision(.*?)(?:$|---)', md, re.DOTALL)
 notes_text = notes_match.group(1).strip() if notes_match else ""
 
-# Word count table
-wc_match = re.search(r'\| (\d+) — .+? \| (.+?) \|', md)
-# Actually find the new word count table after Chapter 4 was added
-wc_match = re.search(r'## Revised word counts after Chapter 4.*?\n\n(.+?)(?:\n\n|\Z)', md, re.DOTALL)
-wc_table_md = wc_match.group(1).strip() if wc_match else ""
+# Word count table — find the LATEST "Revised word counts after Chapter N" block
+wc_matches = list(re.finditer(r'## Revised word counts after Chapter (\d+).*?\n\n(.+?)(?:\n\n|\Z)', md, re.DOTALL))
+wc_table_md = wc_matches[-1].group(2).strip() if wc_matches else ""
 
 # Also find the original notes
 orig_notes_match = re.search(r'## Notes on revision\n(.*?)(?:\n\n---|\n\n## Revised)', md, re.DOTALL)
