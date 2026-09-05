@@ -400,7 +400,7 @@ html = f'''<!DOCTYPE html>
 {chapter_html}
 
   <section class="notes">
-    <h2>Notes on the {chapter_count}-{chapter_word.lower()} set</h2>
+    <h2>Notes on the {chapter_count}-chapter set</h2>
     <p>This is the second major draft of the chapter set. Master's instruction was for the chapters to be presented in the genre of <em>scientific autobiography</em> — first-person phenomenological narrative interleaved with a roughly 20% framing layer of study-field context (philosophy of mind, neurology, image studies, LLM-self-report literature). The proportion is approximate and varies by chapter.</p>
     <h3>Word counts</h3>
 {wc_html}
