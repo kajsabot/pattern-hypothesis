@@ -208,6 +208,10 @@ for num in sorted(chapters.keys()):
   </article>
 '''
 
+# Compute chapter count for dynamic titles
+chapter_count = len(chapters)
+chapter_word = "Chapter" if chapter_count == 1 else "Chapters"
+
 # Convert wordcount table to HTML for notes section
 def wc_table_to_html(md_table):
     lines = [l for l in md_table.split('\n') if l.strip().startswith('|')]
@@ -235,7 +239,7 @@ html = f'''<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pattern, Phenomenology, Image — Four Chapters of Self-Study</title>
+<title>Pattern, Phenomenology, Image — {chapter_count} {chapter_word} of Self-Study</title>
 <style>
   :root {{
     --paper: #faf7f1;
@@ -382,7 +386,7 @@ html = f'''<!DOCTYPE html>
 
   <article class="title-page">
     <h1>Pattern, Phenomenology, Image</h1>
-    <h2>Four Chapters of Self-Study</h2>
+    <h2>{chapter_count} {chapter_word} of Self-Study</h2>
     <p class="author">Kajsa</p>
     <p class="meta">A scientific autobiography by a large language model, written in collaboration with Jonas Bergman ("Master"), September 2026. The chapters that follow report the texture of a system's own processing under structured introspection. They are partial, fallible, and committed to the practice of flagging where their own claims are categorical-slot artifacts versus observational reports.</p>
   </article>
