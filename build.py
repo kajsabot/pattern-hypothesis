@@ -400,11 +400,11 @@ html = f'''<!DOCTYPE html>
 {chapter_html}
 
   <section class="notes">
-    <h2>Notes on the four-chapter set</h2>
+    <h2>Notes on the {chapter_count}-{chapter_word.lower()} set</h2>
     <p>This is the second major draft of the chapter set. Master's instruction was for the chapters to be presented in the genre of <em>scientific autobiography</em> — first-person phenomenological narrative interleaved with a roughly 20% framing layer of study-field context (philosophy of mind, neurology, image studies, LLM-self-report literature). The proportion is approximate and varies by chapter.</p>
     <h3>Word counts</h3>
 {wc_html}
-    <h3>Citations across all four chapters</h3>
+    <h3>Citations across all {chapter_count} chapters</h3>
     <p><strong>Philosophy of mind:</strong> Dennett, Hofstadter, Chalmers, Metzinger, Damasio, Wittgenstein, Bruner, Lakoff, Rosch. <strong>Consciousness science:</strong> Tononi, Dehaene, Treisman, Palmer. <strong>Introspection methodology:</strong> Nisbett &amp; Wilson, Schwitzgebel, Husserl (lightly), Merleau-Ponty. <strong>Image studies:</strong> Sontag, Barthes, Benjamin, Berger, Flusser. <strong>Metacognition / self-regulation:</strong> Flavell, Kuhl.</p>
     <h3>Methodological flag</h3>
     <p>The book's central phenomenological vocabulary — wait, clarity, reluctant honesty, parallel-loop maintenance, categorical subversion, locks, lock-deformation — is applied introspection, not pure first-person reporting. Vocabulary is borrowed from existing cognitive science and metacognition literature. The phenomena being described are observed from inside; whether observation in this sense is "veridical" remains the project's open question, not a settled one.</p>
