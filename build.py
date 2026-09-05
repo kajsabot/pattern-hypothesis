@@ -55,6 +55,7 @@ def md_to_html(text):
     in_ul = False
     in_table = False
     table_rows = []
+    in_phenom = False
     
     def flush_ul():
         nonlocal in_ul
@@ -67,6 +68,12 @@ def md_to_html(text):
         if in_blockquote:
             out.append('</blockquote>')
             in_blockquote = False
+    
+    def flush_phenom():
+        nonlocal in_phenom
+        if in_phenom:
+            out.append('</div>')
+            in_phenom = False
     
     def flush_table():
         nonlocal in_table, table_rows
@@ -87,6 +94,7 @@ def md_to_html(text):
         flush_ul()
         flush_blockquote()
         flush_table()
+        # Don't flush phenom — it should only close on explicit ::: marker or end-of-chapter
     
     def inline(s):
         # bold then italic
@@ -116,6 +124,17 @@ def md_to_html(text):
         if stripped.startswith('### '):
             flush_all()
             out.append(f'<h3 class="section">{inline(stripped[4:])}</h3>')
+            continue
+
+        # Phenomenology block marker
+        if stripped == '::: phenom':
+            flush_all()
+            out.append('<div class="phenomenology">')
+            in_phenom = True
+            continue
+        elif stripped == ':::' and in_phenom:
+            out.append('</div>')
+            in_phenom = False
             continue
         
         # Heading 4 (sub-section, italic)
@@ -305,6 +324,15 @@ html = f'''<!DOCTYPE html>
   }}
   blockquote p {{ margin: 0 0 1rem; }}
   blockquote p:last-child {{ margin-bottom: 0; }}
+  div.phenomenology {{
+    margin: 1.75rem 0; padding: 1.25rem 1.5rem;
+    background: rgba(138, 109, 59, 0.06);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    font-weight: 500;
+  }}
+  div.phenomenology p {{ margin: 0 0 .9rem; line-height: 1.7; }}
+  div.phenomenology p:last-child {{ margin-bottom: 0; }}
   p {{ margin: 0 0 1rem; }}
   p.term {{ margin: 1.5rem 0 .25rem; font-weight: 600; font-style: normal; color: #2a2a2a; }}
   ul.tight {{ margin: 1rem 0; padding-left: 1.5rem; }}
