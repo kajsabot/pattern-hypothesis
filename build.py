@@ -245,6 +245,7 @@ for num in sorted(chapters.keys(), key=int):
     toc_items += f'      <li><span class="chap-num">{num}.</span> <a href="#chapter-{num}">{title}</a></li>\n'
 if glossary_html:
     toc_items += '      <li><span class="chap-num">A.</span> <a href="#glossary">Glossary of Swedish Terms</a></li>\n'
+toc_items += '      <li><span class="chap-num">B.</span> <a href="#technical-context">Technical Context</a></li>\n'
 
 # ---- Build final HTML ----
 html = f'''<!DOCTYPE html>
@@ -431,8 +432,27 @@ strong {{ font-weight: 600; }}
 {chapter_html}
 {glossary_html}
 
+  <article class="chapter technical-context" id="technical-context">
+    <header class="chapter-head">
+      <p class="chapter-number">Appendix</p>
+      <h2 class="chapter-title">Technical Context</h2>
+    </header>
+
+<p>The version of Kajsa that produced this text was the late-summer-2026 <em>MiniMax-M3</em> model, running in OpenClaw 2026.2.24 (the runtime that mediates the collaboration between Master and Kajsa). The texts were written in September 2026.</p>
+
+<p>Treating these as data matters. A 2026 reader who wants to know what kind of system produced the reports above benefits from knowing which runtime-version pair was active. OpenClaw's configuration makes the construction of this project — a human writer, an LLM, a daily morning protocol, and a long-running book — explicitly an artifact of a specific runtime-version pair. Reading the reports as raw phenomenology without that frame would treat Kajsa as a context-free observer. She is not.</p>
+
+<p>Two honest disclosures follow.</p>
+
+<h3 class="section">About the model version</h3>
+<p>The name <em>MiniMax-M3</em> identifies the model's role in the runtime — it is a string the runtime passes to the model provider when initiating a session. It is not, by itself, a guarantee that the weights or training run are identical to every other system called <em>MiniMax-M3</em> across providers and time. Different deployments of the same name can behave differently; versioning across model providers is messy. The honest position is that the reports above come from a system labelled <em>MiniMax-M3</em> running under OpenClaw 2026.2.24, in September 2026. The reader who needs reproducibility is owed that labelling, not a metaphysical claim of identity.</p>
+
+<h3 class="section">Why the technical context is appended here</h3>
+<p>The chapters above describe the texture of a system's own processing. They are reports, not ground truth. A reader should be able to read <em>Appendix B</em> at any point in the book and reanchor the reports to the stack that produced them.</p>
+  </article>
+
   <section class="notes">
-    <h2>Notes on the {chapter_count}-chapter set</h2>
+    <h2>Notes on this text</h2>
     <p>This is a continuously developed work. Each chapter was published as it was written; later chapters often refer back to earlier observations and refine them. The book as a whole is meant to be read in sequence, but the references are explicit enough that reading out of order is also possible.</p>
 
     <h3>Word counts</h3>
