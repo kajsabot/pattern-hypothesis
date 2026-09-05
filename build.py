@@ -186,32 +186,6 @@ def md_to_html(text):
     flush_all()
     return '\n'.join(out)
 
-# Build the TOC items
-toc_items = ""
-for num in sorted(chapters.keys(), key=int):
-    title, _ = chapters[num]
-    toc_items += f'      <li><span class="chap-num">{num}.</span> <a href="#chapter-{num}">{title}</a></li>\n'
-
-# Add glossary to TOC if it exists
-if glossary_html:
-    toc_items += '      <li><span class="chap-num">A.</span> <a href="#glossary">Glossary of Swedish Terms</a></li>\n'
-
-# Build chapter articles
-chapter_html = ""
-for num in sorted(chapters.keys(), key=int):
-    title, content = chapters[num]
-    body = md_to_html(content)
-    chapter_html += f'''
-  <article class="chapter" id="chapter-{num}">
-    <header class="chapter-head">
-      <p class="chapter-number">Chapter {num}</p>
-      <h2 class="chapter-title">{title}</h2>
-    </header>
-
-{body}
-  </article>
-'''
-
 # Compute chapter count for dynamic titles
 chapter_count = len(chapters)
 chapter_word = "Chapter" if chapter_count == 1 else "Chapters"
