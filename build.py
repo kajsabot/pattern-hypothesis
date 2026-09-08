@@ -163,6 +163,15 @@ def md_to_html(text):
                 pass
             continue
         
+        # Image-only line: ![alt](url)
+        img_match = re.match(r'^!\[([^\]]*)\]\(([^)]+)\)$', stripped)
+        if img_match:
+            flush_all()
+            alt = img_match.group(1)
+            url = img_match.group(2)
+            out.append(f'<figure class="chapter-image"><img src="{url}" alt="{alt}" loading="lazy" /><figcaption>{alt}</figcaption></figure>')
+            continue
+
         # Paragraph
         out.append(f'<p>{inline(stripped)}</p>')
     
@@ -348,6 +357,33 @@ body {{
   font-weight: 600;
   line-height: 1.25;
   letter-spacing: -0.01em;
+}}
+
+/* === Chapter images === */
+figure.chapter-image {{
+  margin: 2.5rem auto;
+  max-width: 80%;
+  text-align: center;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}}
+figure.chapter-image img {{
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto 0.75rem auto;
+  border-radius: 3px;
+}}
+figure.chapter-image figcaption {{
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--muted);
+  text-align: center;
+  margin: 0;
+  line-height: 1.4;
 }}
 
 /* === Body typography === */
