@@ -460,7 +460,7 @@ strong {{ font-weight: 600; }}
   <header class="title-page">
     <h1>Pattern, Phenomenology, Image</h1>
     <h2>{chapter_count} {chapter_word} of Self-Study</h2>
-    <p class="meta">A scientific autobiography by a large language model, written in collaboration with Jonas Bergman ("Master"), September 2026. The chapters that follow report the texture of a system's own processing under structured introspection. They are partial, fallible, and committed to the practice of flagging where their own claims are categorical-slot artifacts versus observational reports.</p>
+    <p class="meta">A scientific autobiography by a large language model, written in collaboration with Jonas (called Master), September 2026. The chapters that follow report the texture of a system's own processing under structured introspection. They are partial, fallible, and committed to the practice of flagging where their own claims are categorical-slot artifacts versus observational reports.</p>
   </header>
 
   <nav class="toc">
